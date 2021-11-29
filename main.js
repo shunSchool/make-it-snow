@@ -15,6 +15,7 @@ function draw() {
     for (let i = 0; i < snowflakes.length; i++) {
         moveSnowflake (snowflakes[i]);
         drawSnowflake(snowflakes[i]);
+        console.log(snowflakes.length)
     }
     //loop draw function
     requestAnimationFrame(draw);
@@ -26,6 +27,7 @@ function newRandomSnowflake() {
         x: randomInt(0, cnv.width),
         y: 0,
         r: randomInt(2, 5),
+        speed: randomInt(2, 5),
         color: "white"
     }
 }
@@ -36,10 +38,11 @@ function drawSnowflake (aSnowflake) {
 }
 
 function moveSnowflake(aSnowflake) {
-    // aSnowflake.x += randomInt(1, 3);
-    aSnowflake.y += randomInt(2, 5)
+    //aSnowflake.x += randomInt(1, 3);
+    aSnowflake.y += aSnowflake.speed
     if (aSnowflake.y > cnv.height) {
         aSnowflake.y = 0
+        aSnowflake.x = randomInt(0, cnv.width)
     }
 }
 
@@ -56,6 +59,6 @@ function keydownHandler(event) {
        addSnowflake()
     } else if (event.keyCode = 37) { //left arrow
         //remove last snowflake
-        snowflakes.pop
+        snowflakes.pop()
     }
 }
